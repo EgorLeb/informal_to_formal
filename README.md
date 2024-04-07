@@ -1,2 +1,3 @@
-# unformal_to_formal
+# informal_to_formal
 Егор лох, неправда
+eto pravda ya sama videla
