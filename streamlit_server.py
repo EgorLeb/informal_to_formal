@@ -1,5 +1,7 @@
 import streamlit as st
 
+st.title("Informal to formal")
+
 text = st.text_area("Введите текст в неформальной форме", max_chars=300, height=150)
 
 if st.button("Перевести"):
