@@ -48,11 +48,15 @@ headers = {"Authorization": "Bearer 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"}
 
 
 def query(payload):
-    response = requests.post(API_URL, headers=headers, json=payload)
-    response = response.json()
-    if len(response) == 0:
-        response = [{"generated_text": "Прошу прощения, но я не смог это обработать"}]
-    return response
+    for _ in range(10):
+        try:
+            response = requests.post(API_URL, headers=headers, json=payload)
+            response = response.json()
+            if len(response) == 0:
+                response = [{"generated_text": "Прошу прощения, но я не смог это обработать"}]
+            return response
+        except Exception as e:
+            continue
 
 
 if "last" not in st.session_state:
