@@ -43,15 +43,36 @@ def request_YandexGPT(text_list, folder_id, IAM_token):
     return json.loads(result)['result']['alternatives'][0]['message']['text']
 
 
+API_URL = "https://api-inference.huggingface.co/models/VorArt/Formalist"
+headers = {"Authorization": "Bearer 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"}
+
+
+def query(payload):
+    response = requests.post(API_URL, headers=headers, json=payload)
+    return response.json()
+
+
+if "last" not in st.session_state:
+    st.session_state.last = ''
+
 st.title("Informal to formal")
 
 text = st.text_area("Введите текст в неформальной форме", max_chars=300, height=150)
 
 if st.button("Перевести"):
-    st.text_area("Ответ", max_chars=300, height=150, value=", блять, ".join(text.upper().split()))
-else:
-    st.text_area("Ответ", max_chars=300, height=150)
-
+    st.session_state.last = query({
+        "inputs": text,
+        "parameters": {
+            "max_length": 50,
+            "num_return_sequences": 1,
+            "temperature": 0.7,
+            "do_sample": True,
+            "top_k": 50,
+            "top_p": 0.92,
+            "repetition_penalty": 1.2
+        }
+    })[0]["generated_text"]
+st.text_area("Ответ", max_chars=300, height=150, value=st.session_state.last)
 st.text("Помогите дообучить модель, как вам перевод конкретно этого предложения?")
 
 c1, c2, c3, c4, c5, c6 = st.columns(6)
