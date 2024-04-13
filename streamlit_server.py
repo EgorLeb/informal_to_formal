@@ -65,7 +65,7 @@ if st.button("Перевести"):
         "parameters": {
             "max_length": 300,
             "num_return_sequences": 1,
-            "temperature": 0.9,
+            "temperature": 0.5,
             "do_sample": True,
             "top_k": 50,
             "top_p": 0.92,
@@ -77,10 +77,10 @@ st.text("Помогите дообучить модель, как вам пер�
 
 c1, c2, c3, c4, c5, c6 = st.columns(6)
 if c1.button("Хорошо"):
-    pass
+    st.text("Спасибо за оценку!!!")
 
 if c2.button("Плохо"):
-    pass
+    st.text("Спасибо за оценку!!!")
 
 if st.button("Хочу увидеть что ответит Yandex-GPT"):
     if text.strip() != '':
