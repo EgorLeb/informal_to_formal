@@ -63,9 +63,9 @@ if st.button("Перевести"):
     st.session_state.last = query({
         "inputs": text,
         "parameters": {
-            "max_length": 50,
+            "max_length": 300,
             "num_return_sequences": 1,
-            "temperature": 0.7,
+            "temperature": 0.9,
             "do_sample": True,
             "top_k": 50,
             "top_p": 0.92,
