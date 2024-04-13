@@ -3,7 +3,7 @@ import requests
 import json
 
 folder_id = 'b1gql3ul5bq1rbuv2fvg'
-IAM_token = "t1.9euelZqYipnMyY2YzcfOmMbOjM-Smu3rnpWanoyZxo7HxpOKio-Yx8qVjpDl8_clUxhP-e87CA51_N3z92UBFk_57zsIDnX8zef1656VmpiOi5Kbi4qczI_JzcybnpSP7_zF656VmpiOi5Kbi4qczI_JzcybnpSP._GAPD9v9kQoeaKPrLCJB6-s1Ez87V5itO_RueFWd7d3oDQDjuJFyAHGWbB-TYsYL8W7RHiCz7UmboildvTQpDg"
+IAM_token = "t1.9euelZqRnM6enpOZx8zOlJuPj5KLje3rnpWanoyZxo7HxpOKio-Yx8qVjpDl8_coDxdP-e8ADEEZ_t3z92g9FE_57wAMQRn-zef1656Vmo2Xm5aQlc6Xz5eWzcuYyZ6W7_zF656Vmo2Xm5aQlc6Xz5eWzcuYyZ6W.TqptZAHdY7S0fmBlPf0b0EB5MUnHGpaIqgnzNGjxHulyfEbQTExCtfrJa9_0bJuGldv7vKOjm7WD8O9WFOeiCw"
 
 
 # temporary token
@@ -49,7 +49,10 @@ headers = {"Authorization": "Bearer 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"}
 
 def query(payload):
     response = requests.post(API_URL, headers=headers, json=payload)
-    return response.json()
+    response = response.json()
+    if len(response) == 0:
+        response = [{"generated_text": "Прошу прощения, но я не смог это обработать"}]
+    return response
 
 
 if "last" not in st.session_state:
